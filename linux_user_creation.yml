@@ -1,0 +1,11 @@
+---
+
+- name: Template to Create a User in Linux Machine.
+  hosts: all
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Create User
+      user:
+        name: nsingh68
+        state: present
