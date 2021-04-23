@@ -1,0 +1,6 @@
+---
+- name: Ping Pong Test
+  gather_facts: false
+  hosts: all
+  tasks:
+    - action: ping
