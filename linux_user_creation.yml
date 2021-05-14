@@ -7,5 +7,5 @@
   tasks:
     - name: Create User
       user:
-        name: nsingh68
+        name: "{{ username }}"
         state: present
