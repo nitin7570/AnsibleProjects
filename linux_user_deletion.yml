@@ -7,5 +7,5 @@
   tasks:
     - name: Delete User
       user:
-        name: nsingh68
+        name: "{{ username }}"
         state: absent
