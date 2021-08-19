@@ -1,0 +1,6 @@
+---
+- name: Windows Ping Pong Test
+  hosts: all
+  gather_facts: false
+  tasks:
+    - action: ping
