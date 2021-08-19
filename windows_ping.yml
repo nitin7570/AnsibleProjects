@@ -5,6 +5,5 @@
   tasks:
     - name: custom Ping for windows
       action: win_ping
-      when: ( 'running' in powerstate)
       register: win_output
 
