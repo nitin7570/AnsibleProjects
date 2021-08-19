@@ -1,0 +1,19 @@
+---
+- name: Playbook to Install, Configure Apache on Remote Host
+  become: true
+  hosts: all
+  tasks:
+    - name: Install httpd
+      yum:
+        name: httpd
+        state: latest
+
+    - name: Start https
+      service:
+        name: httpd
+        state: started
+
+    - name: Host a HTML file
+      copy:
+        content: "<h1>Hello Nitin!</h1>"
+        dest: /var/www/html/index.html
