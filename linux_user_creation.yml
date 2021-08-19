@@ -8,5 +8,5 @@
       user:
         name: "{{ item }}"
         state: present
-        password: "{{ lookup('password', '/dev/null length=16 chars=ascii_letters,digits,punctuation') }}"
+        password: "{{ user_password | password('sha512') }}"
       with_items: "{{ username.split(',') }}"
