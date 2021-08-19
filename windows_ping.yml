@@ -1,6 +1,10 @@
 ---
 - name: Windows Ping Pong Test
   hosts: all
-  gather_facts: false
+  gather_facts: no
   tasks:
-    - action: ping
+    - name: custom Ping for windows
+      action: win_ping
+      when: ( 'running' in powerstate)
+      register: win_output
+
