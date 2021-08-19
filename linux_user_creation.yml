@@ -1,5 +1,4 @@
 ---
-
 - name: Template to Create a User in Linux Machine.
   hosts: all
   gather_facts: false
@@ -7,5 +6,6 @@
   tasks:
     - name: Create User
       user:
-        name: "{{ username }}"
+        name: "{{ item }}"
         state: present
+      with_items: "{{ username.split(',') }}"
