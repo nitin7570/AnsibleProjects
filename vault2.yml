@@ -7,7 +7,7 @@
         url: "http://{{vault_ip}}:443/v1/aws/{{accountid}}/creds/ec2"
         headers:
           Content-Type: application/json
-          X-Vault-Token: {{vault_token}}
+          X-Vault-Token: "{{vault_token}}"
         method: POST
         force_basic_auth: yes
         body_format: json
