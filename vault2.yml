@@ -1,0 +1,36 @@
+---
+- name: Playbook to fetch secrets from Vault
+- hosts: all
+- tasks:
+    - name: Fetch Password
+      uri:
+        url: "http://{{vault_ip}}:443/v1/aws/{{accountid}}/creds/ec2"
+        headers:
+          Content-Type: application/json
+          X-Vault-Token: {{vault_token}}
+        method: POST
+        force_basic_auth: yes
+        body_format: json
+      delegate_to: localhost
+      register: login
+
+    - name: Set Password
+      shell: aws configure set aws_access_key_id {{login.json.data.access_key}}
+      delegate_to: localhost
+
+    - name: Set Key
+      shell: aws configure set aws_secret_access_key {{login.json.data.secret_key}}
+      delegate_to: localhost
+
+    - name: Print Keys
+      debug:
+        var: login.json.data
+
+    - name: Create Policy
+      iam_managed_policy:
+      policy_name: "Test-Policy"
+      policy_description: "test policy"
+      policy: "{{ lookup('template', '/var/lib/awx/projects/_8__demo_project/Policy.txt') }}"
+      state: present
+      delegate_to: localhost
+	  
